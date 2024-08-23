@@ -1,47 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatCardModule} from '@angular/material/card'
+import { MatCardModule } from '@angular/material/card'
 import { Store } from '@ngrx/store';
 import { loadProductsSuccess } from './+state/products/products.actions';
 import { selectAllProducts } from './+state/products/products.selectors';
+import { products } from './mock-products';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'lib-products',
   standalone: true,
-  imports: [CommonModule, MatCardModule],
+  imports: [CommonModule, MatCardModule, FlexLayoutModule, RouterModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
 export class ProductsComponent implements OnInit {
   newProducts: any;
-  products = [{
-    "name":"Angular",
-    "id":1,
-    "author":"abc",
-    "description": "Angular is an open source library",
-    "added": false,
-    "image": "./assets/best-angular-app-examples.png",
-    "price": 399
-},
-{
-    "name": "React",
-    "id":2,
-    "author":"xyz",
-    "description": "React is an advanced web technology",
-    "added": false,
-    "image": "./assets/best-angular-app-examples.png",
-    "price": 499
-}];
-  constructor(private store: Store) {
-    this.store.dispatch(loadProductsSuccess({'products': this.products}));
-     this.store.select(selectAllProducts).subscribe((res) => {
+
+  constructor(private store: Store, private router: Router) {
+    this.store.dispatch(loadProductsSuccess({ 'products': products }));
+    this.store.select(selectAllProducts).subscribe((res) => {
       this.newProducts = res;
-     });
+    });
   }
-ngOnInit() {}
+  ngOnInit() { }
 
-addToCart(id: number) {
+  addToCart(id: number) {
 
-}
+  }
+  buy() {
+    this.router.navigate(['/dashboard/subscription'])
+  }
 }
