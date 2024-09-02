@@ -1,0 +1,26 @@
+.desImage {
+    width: 100%;
+    height: 100px;
+  }
+  
+  .addTocart {
+    background-color: #8710d8;
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .buy {
+    background-color: tomato;
+  }
+  .back {
+    cursor: pointer;
+  }
+  .content {
+    margin: auto;
+    justify-content: center;
+    flex: 1 0 auto;
+  }

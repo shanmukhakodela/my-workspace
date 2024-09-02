@@ -1,5 +1,5 @@
 <ng-container>
-    Welcome back, 
+    Welcome back,
     <div class="content">
       <div fxLayout="row wrap" fxLayoutGap="16px">
           <div *ngFor="let product of newProducts" >
@@ -18,8 +18,12 @@
                 <p>{{product.price | currency:'INR':'symbol' }}</p>
               </mat-card-content>
               <mat-card-actions>
-                <button mat-button (click)="addToCart(product.id)">Add To Cart</button>
-                <button mat-button  (click)="buy()">Buy</button>
+                <div>
+                  <button mat-button (click)="addToCart(product.id)" class="addTocart">Add to cart</button>
+                </div>
+                <!-- <div>
+                  <button mat-button  (click)="buy()" class="buy">Buy</button>
+                </div> -->
               </mat-card-actions>
             </mat-card>
         </div>

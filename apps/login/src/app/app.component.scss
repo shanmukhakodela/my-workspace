@@ -5,6 +5,25 @@ a {
 mat-toolbar {
     background-color: blanchedalmond;
 }
-.active-link {
-    background-color: lightcyan;
+
+.cart {
+    float: right;
+    cursor: pointer;
+    position: relative;
+.cart_new {
+    margin-right: 10px;
 }
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  mat-form-field {
+    position: relative;
+  }

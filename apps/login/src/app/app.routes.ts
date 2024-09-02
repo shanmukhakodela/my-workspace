@@ -5,14 +5,22 @@ import * as fromProducts from '../../../../libs/products/src/lib/products/+state
 
 export const appRoutes: Route[] = [
   {
-    path:'',
-    component: SigninComponent
+    path: 'cart',
+    loadChildren: () =>
+      import('subscription/Routes').then((m) => m.remoteRoutes),
+  },
+  {
+    path: '',
+    component: SigninComponent,
   },
   {
     path: 'dashboard',
     loadChildren: () => import('dashboard/Routes').then((m) => m.remoteRoutes),
     providers: [
-      provideState({ 'name': fromProducts.PRODUCTS_FEATURE_KEY,'reducer': fromProducts.productsReducer })
-    ]
-  }
+      provideState({
+        name: fromProducts.PRODUCTS_FEATURE_KEY,
+        reducer: fromProducts.productsReducer,
+      }),
+    ],
+  },
 ];

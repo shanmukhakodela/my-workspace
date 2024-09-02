@@ -9,4 +9,8 @@ import { ProductsComponent } from '@my-workspace/products';
   selector: 'app-dashboard-entry',
   template: `<lib-products></lib-products>`,
 })
-export class RemoteEntryComponent {}
+export class RemoteEntryComponent {
+  constructor() {}
+
+ 
+}

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ProductsService } from 'libs/products/src/lib/products.service';
 @Component({
   selector: 'app-signin',
   standalone: true,
@@ -13,7 +14,8 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './signin.component.scss',
 })
 export class SigninComponent {
-  constructor(private router: Router) {
+  invalid = false;
+  constructor(private router: Router, private service: ProductsService) {
 
   }
   loginForm = new FormGroup({
@@ -22,8 +24,12 @@ export class SigninComponent {
   });
 
   login() {
-      if(this.loginForm.valid) {
+      if(this.loginForm.valid && this.loginForm.value.username === 'demo' && this.loginForm.value.password === 'demo') {
+        localStorage.setItem('isLoggedIn', "true");
+        this.service.setIsLogged(true);
         this.router.navigate(['/dashboard'])
+      } else {
+        this.invalid = true;
       }
   }
 }

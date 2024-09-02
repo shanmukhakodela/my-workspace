@@ -8,4 +8,6 @@ export interface ProductsEntity {
   added: boolean;
   image: string;
   price: number;
+  avatar: string;
+  author: string
 }
