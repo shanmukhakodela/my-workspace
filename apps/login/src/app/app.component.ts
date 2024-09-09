@@ -6,13 +6,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { ProductsService } from 'libs/products/src/lib/products.service';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { loadFilteredProducts, loadProductsSuccess, setSearchQuery } from 'libs/products/src/lib/products/+state/products/products.actions';
+import { loadProductsSuccess } from 'libs/products/src/lib/products/+state/products/products.actions';
 import { selectAllProducts } from 'libs/products/src/lib/products/+state/products/products.selectors';
 import { products } from 'libs/products/src/lib/products/mock-products';
+import { ProductsEntity } from 'libs/products/src/lib/products/+state/products/products.models';
 
 @Component({
   standalone: true,
@@ -64,9 +63,9 @@ export class AppComponent implements OnInit {
 
   submit() {
     const value = this.searchForm.value.filter;
-    const newProducts = products.filter((x) => x.name.includes(value));
-    // console.log('value', value, newProducts);
+    const regex = new RegExp(value);
+    const newProducts = products.filter((x) => 
+      Object.keys(x).some(k => x[k as keyof ProductsEntity].toLocaleString().toLowerCase().includes(value.toLowerCase())));
     this.store.dispatch(loadProductsSuccess({'products': newProducts}))
-    // this.store.dispatch(setSearchQuery(value));
   }
 }
