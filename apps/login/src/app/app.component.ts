@@ -9,11 +9,14 @@ import { ProductsService } from 'libs/products/src/lib/products.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-
+import { Store } from '@ngrx/store';
+import { loadFilteredProducts, loadProductsSuccess, setSearchQuery } from 'libs/products/src/lib/products/+state/products/products.actions';
+import { selectAllProducts } from 'libs/products/src/lib/products/+state/products/products.selectors';
+import { products } from 'libs/products/src/lib/products/mock-products';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, CommonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule,
+  imports: [RouterModule, CommonModule, ReactiveFormsModule,
     MatToolbarModule, MatIcon, MatIconModule, MatBadgeModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -24,10 +27,17 @@ export class AppComponent implements OnInit {
   isLoggedIn = false;
   productsAdded = 0;
   searchForm!: FormGroup;
-  constructor(private router: Router, private service: ProductsService) { }
+  newProducts: any;
+  constructor(private router: Router, private store: Store, private service: ProductsService) { }
   ngOnInit(): void {
+    this.store.dispatch(loadProductsSuccess({ 'products': products }));
+    this.store.select(selectAllProducts).subscribe((res) => {
+      this.newProducts = res;
+      console.log('new pr', this.newProducts)
+    });
+
     this.searchForm = new FormGroup({
-      search: new FormControl()
+      filter: new FormControl()
     })
     if (localStorage.getItem('isLoggedIn')) {
       this.service.setIsLogged(true);
@@ -53,7 +63,10 @@ export class AppComponent implements OnInit {
   }
 
   submit() {
-    console.log('this.', this.searchForm.value);
-    
+    const value = this.searchForm.value.filter;
+    const newProducts = products.filter((x) => x.name.includes(value));
+    // console.log('value', value, newProducts);
+    this.store.dispatch(loadProductsSuccess({'products': newProducts}))
+    // this.store.dispatch(setSearchQuery(value));
   }
 }

@@ -20,17 +20,14 @@
               </p>
               <p>{{product.price | currency:'INR':'symbol' }}</p>
             </mat-card-content>
-            <!-- <mat-card-actions>
-              <div>
-                <button mat-button class="addTocart">Check Out</button>
-              </div>
-            </mat-card-actions> -->
           </mat-card>
       </div>
       <div>
         <h4>
             No of courses: {{noOfProducts}}
-            Total: {{sumOfProducts | currency:'INR':'symbol' }}
+        </h4>
+        <h4>
+          Total: {{sumOfProducts | currency:'INR':'symbol' }}
         </h4>
         <div>
             <button mat-button class="addTocart">Check Out</button>

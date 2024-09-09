@@ -2,18 +2,15 @@
   <mat-toolbar>
     <mat-toolbar-row>
       <div style="width: 100%;">
-        <div style="float: left;">
+        <div class="title">
           <img src="logo-original.png" [attr.width]="30" [attr.height]="30" alt=""> Course Academy
-          <div  class="example-form">
+        </div>
+          <div  class="example-form" *ngIf="isLoggedIn">
             <form [formGroup]="searchForm" (ngSubmit)="submit()">
-              <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Search</mat-label>
-                <mat-icon matPrefix>search</mat-icon>
-                <input type="search" matInput formControlName="search">
-              </mat-form-field>
+              <!-- <input type="search" matInput formControlName="filter" placeholder="search"> -->
+              <input type="text" placeholder="search" formControlName="filter"><i (click)="submit()" class="material-icons">search</i>
               </form>
           </div>
-        </div>
         <div class="cart" *ngIf="isLoggedIn">
           <span class="cart_new">
             <mat-icon (click)="gotoCart()" [matBadgeHidden]="productsAdded == 0" matBadge={{productsAdded}}
