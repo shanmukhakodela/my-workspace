@@ -1,0 +1,9 @@
+{
+  "name": "subscription1-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/subscription1-e2e/src",
+  "implicitDependencies": ["subscription1"],
+  "// targets": "to see all targets run: nx show project subscription1-e2e --web",
+  "targets": {}
+}

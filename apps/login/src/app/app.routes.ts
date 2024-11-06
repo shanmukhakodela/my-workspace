@@ -5,6 +5,11 @@ import * as fromProducts from '../../../../libs/products/src/lib/products/+state
 
 export const appRoutes: Route[] = [
   {
+    path: 'subscription1',
+    loadChildren: () =>
+      import('subscription1/Routes').then((m) => m.remoteRoutes),
+  },
+  {
     path: 'cart',
     loadChildren: () =>
       import('subscription/Routes').then((m) => m.remoteRoutes),

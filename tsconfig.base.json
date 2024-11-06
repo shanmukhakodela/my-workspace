@@ -21,6 +21,9 @@
       ],
       "subscription/Routes": [
         "apps/subscription/src/app/remote-entry/entry.routes.ts"
+      ],
+      "subscription1/Routes": [
+        "apps/subscription1/src/app/remote-entry/entry.routes.ts"
       ]
     }
   },

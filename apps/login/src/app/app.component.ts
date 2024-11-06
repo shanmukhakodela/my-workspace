@@ -32,7 +32,6 @@ export class AppComponent implements OnInit {
     this.store.dispatch(loadProductsSuccess({ 'products': products }));
     this.store.select(selectAllProducts).subscribe((res) => {
       this.newProducts = res;
-      console.log('new pr', this.newProducts)
     });
 
     this.searchForm = new FormGroup({
